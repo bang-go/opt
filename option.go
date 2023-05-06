@@ -1,16 +1,16 @@
 package opt
 
-type Option[T comparable] interface {
+type Option[T any] interface {
 	apply(*T)
 }
 
-type OptionFunc[T comparable] func(*T)
+type OptionFunc[T any] func(*T)
 
 func (f OptionFunc[T]) apply(o *T) {
 	f(o)
 }
 
-func Each[T comparable](options *T, opts ...Option[T]) {
+func Each[T any](options *T, opts ...Option[T]) {
 	for _, opt := range opts {
 		opt.apply(options)
 	}
